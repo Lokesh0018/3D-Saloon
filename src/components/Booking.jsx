@@ -49,6 +49,14 @@ const Booking = () => {
 
   return (
     <section id="contact" className="section booking" ref={sectionRef}>
+      <div className="booking-bg-elements">
+        <img src="/comb-removebg-preview.png" className="booking-floating-tool tool-comb" alt="" />
+        <img src="/scissors-removebg-preview.png" className="booking-floating-tool tool-scissors" alt="" />
+        <img src="/tri-removebg-preview.png" className="booking-floating-tool tool-trimmer" alt="" />
+        <img src="/spray-removebg-preview.png" className="booking-floating-tool tool-spray" alt="" />
+        <img src="/brush-removebg-preview.png" className="booking-floating-tool tool-brush" alt="" />
+      </div>
+      
       <div className="container booking-container" ref={contentRef}>
         <div className="booking-content">
           <h4 className="subtitle text-gold">Reserve</h4>
