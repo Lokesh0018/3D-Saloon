@@ -1,20 +1,22 @@
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  width: auto;
   z-index: 100;
-  padding: 1.5rem 0;
-  transition: var(--transition-smooth);
+  padding: 1.25rem 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   background: transparent;
+  border-radius: 4px;
 }
 
 .navbar.scrolled {
-  background: rgba(5, 5, 5, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 1rem 0;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 1rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .navbar-container {
@@ -72,12 +74,16 @@
   font-size: 0.9rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  transition: var(--transition-smooth);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
   background-color: var(--color-gold);
   color: var(--color-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px -3px rgba(197, 160, 89, 0.2);
 }
 
 .mobile-only {

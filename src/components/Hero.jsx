@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import './Hero.css';
 
-const TOTAL_FRAMES = 143;
+const TOTAL_FRAMES = 145;
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -27,14 +27,14 @@ const Hero = () => {
 
     // Prioritize center frame (72) for initial load, then the rest
     const loadOrder = [72];
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    for (let i = 0; i < TOTAL_FRAMES; i++) {
       if (i !== 72) loadOrder.push(i);
     }
 
     loadOrder.forEach((i) => {
       const img = new Image();
-      const paddedIndex = i.toString().padStart(3, '0');
-      img.src = `/hero frames/ezgif-frame-${paddedIndex}.jpg`;
+      const paddedIndex = i.toString().padStart(6, '0');
+      img.src = `/hero frames/frame_${paddedIndex}.webp`;
       img.onload = () => {
         images[i] = img;
         loadedCount++;
@@ -62,7 +62,7 @@ const Hero = () => {
     // Easing for smooth frame transition
     frameRef.current.current += (target - current) * 0.15;
     
-    const frameIndex = Math.max(1, Math.min(TOTAL_FRAMES, Math.round(frameRef.current.current)));
+    const frameIndex = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.round(frameRef.current.current)));
     const img = imagesRef.current[frameIndex];
 
     if (img && img.complete) {
@@ -108,8 +108,8 @@ const Hero = () => {
     const rect = heroRef.current.getBoundingClientRect();
     const x = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
     
-    // Map to frame index (1 to 143)
-    frameRef.current.target = 1 + x * (TOTAL_FRAMES - 1);
+    // Map to frame index (0 to 144)
+    frameRef.current.target = x * (TOTAL_FRAMES - 1);
 
     // Subtle Parallax
     const centerX = rect.width / 2;

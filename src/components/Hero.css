@@ -22,65 +22,81 @@
 .hero-content {
   width: 45%;
   max-width: 550px;
-  margin-left: clamp(2rem, 5vw, 6rem); /* Move slightly toward the center */
+  margin-left: 0;
+  padding-left: 0;
   position: relative;
   z-index: 10;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 1.5rem; /* Pro Max: Use flex gap for consistent vertical rhythm */
 }
 
 .subtitle {
   font-family: var(--font-sans);
-  font-size: 0.8rem;
-  letter-spacing: 4px;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em; /* Pro Max: Wide tracking for uppercase eyebrow */
   text-transform: uppercase;
-  margin-bottom: 1.25rem;
-  white-space: nowrap; /* Keep on one line as requested */
+  margin-bottom: 0;
+  white-space: nowrap;
+  font-weight: 500;
 }
 
 .hero-title {
   font-size: clamp(3.2rem, 4.8vw, 5rem);
-  margin-bottom: 1.25rem;
-  line-height: 0.95; /* Tighter line height for less gap */
+  margin-bottom: 0;
+  line-height: 0.95;
   color: var(--color-text);
   font-family: var(--font-serif);
+  letter-spacing: -0.02em; /* Pro Max: Tight tracking for large serif headings */
 }
 
 .hero-desc {
   font-size: 1.05rem;
   color: var(--color-text-muted);
-  margin-bottom: 2.25rem;
-  line-height: 1.6;
-  max-width: 480px; /* Controlled maximum width */
+  margin-bottom: 1rem;
+  line-height: 1.7; /* Pro Max: Optimal line-height for readability */
+  max-width: 460px;
+  font-weight: 300;
 }
 
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
+  margin-top: 0.5rem;
 }
 
 .btn-primary.filled {
+  padding: 1.15rem 2.5rem; /* Pro Max: More generous touch target */
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 2px;
+  text-transform: uppercase;
   background-color: var(--color-gold);
   color: var(--color-bg);
   border: 1px solid var(--color-gold);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Pro Max: Smooth bezier easing */
 }
 
 .btn-primary.filled:hover {
   background-color: transparent;
   color: var(--color-gold);
-  box-shadow: 0 0 15px rgba(197, 160, 89, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(197, 160, 89, 0.3);
+  transform: translateY(-2px); /* Pro Max: Micro-interaction */
 }
 
 .link-explore {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   position: relative;
   color: var(--color-text);
   padding-bottom: 4px;
+  transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .link-explore::after {
@@ -93,7 +109,11 @@
   background-color: var(--color-gold);
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-explore:hover {
+  color: var(--color-gold);
 }
 
 .link-explore:hover::after {
@@ -144,9 +164,9 @@
   filter: contrast(1.15) brightness(0.9);
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Change to cover to zoom into the 16:9 frame */
+  object-fit: cover; /* Zoom into the 16:9 frame */
   object-position: center center;
-  transform: scale(0.8) translate(15%, 15%); /* Move right (15%) and down (15%) */
+  transform: scale(0.88) translate(8%, 5%); /* Slightly smaller, moved right and up */
   background: transparent;
   border: none;
   outline: none;
