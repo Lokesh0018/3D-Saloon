@@ -26,13 +26,14 @@ const Gallery = () => {
         scrollTrigger: {
           trigger: el,
           start: 'top 70%',
+          toggleActions: 'play reverse play reverse'
         }
       }
     );
   }, []);
 
   return (
-    <section id="gallery" className="section gallery" ref={sectionRef}>
+    <section className="section gallery" ref={sectionRef}>
       <div className="container">
         <div className="gallery-header">
           <h4 className="subtitle text-gold">Portfolio</h4>

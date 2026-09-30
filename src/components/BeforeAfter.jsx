@@ -1,9 +1,30 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './BeforeAfter.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const BeforeAfter = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const containerRef = useRef(null);
+  const sectionRef = useRef(null);
+  const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    gsap.fromTo(wrapperRef.current.children,
+      { y: 50, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 75%',
+          toggleActions: 'play reverse play reverse'
+        }
+      }
+    );
+  }, []);
 
   const handleMove = (clientX) => {
     if (!containerRef.current) return;
@@ -17,8 +38,8 @@ const BeforeAfter = () => {
   const handleTouchMove = (e) => handleMove(e.touches[0].clientX);
 
   return (
-    <section className="section before-after">
-      <div className="container">
+    <section id="gallery" className="section before-after" ref={sectionRef}>
+      <div className="container" ref={wrapperRef}>
         <div className="ba-header">
           <h4 className="subtitle text-gold">Transformations</h4>
           <h2>Precision execution</h2>
@@ -33,7 +54,7 @@ const BeforeAfter = () => {
           >
             {/* After Image (Background) */}
             <div className="slider-image after-image">
-              <img src="https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="After Transformation" />
+              <img src="/after.png" alt="After Transformation" />
               <div className="slider-label label-after">After</div>
             </div>
 
@@ -42,7 +63,7 @@ const BeforeAfter = () => {
               className="slider-image before-image"
               style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
             >
-              <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Before Transformation" />
+              <img src="/before.png" alt="Before Transformation" />
               <div className="slider-label label-before">Before</div>
             </div>
 

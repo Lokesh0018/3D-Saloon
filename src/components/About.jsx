@@ -23,6 +23,7 @@ const About = () => {
         scrollTrigger: {
           trigger: el,
           start: 'top 75%',
+          toggleActions: 'play reverse play reverse'
         }
       }
     );
@@ -35,6 +36,7 @@ const About = () => {
         scrollTrigger: {
           trigger: el,
           start: 'top 75%',
+          toggleActions: 'play reverse play reverse'
         }
       }
     );
@@ -49,6 +51,7 @@ const About = () => {
         scrollTrigger: {
           trigger: el,
           start: 'top 75%',
+          toggleActions: 'play reverse play reverse'
         }
       }
     );

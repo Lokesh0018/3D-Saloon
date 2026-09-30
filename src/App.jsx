@@ -5,7 +5,6 @@ import About from './components/About';
 import Services from './components/Services';
 import BeforeAfter from './components/BeforeAfter';
 import Gallery from './components/Gallery';
-import Experience from './components/Experience';
 import Testimonials from './components/Testimonials';
 import Booking from './components/Booking';
 import Footer from './components/Footer';
@@ -20,7 +19,6 @@ function App() {
         <Services />
         <BeforeAfter />
         <Gallery />
-        <Experience />
         <Testimonials />
         <Booking />
       </main>
