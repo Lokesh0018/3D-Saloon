@@ -1,10 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Quote } from 'lucide-react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Testimonials.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const testimonials = [
   {
@@ -31,20 +28,7 @@ const Testimonials = () => {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
 
-  useEffect(() => {
-    const el = sectionRef.current;
-    gsap.fromTo(cardsRef.current,
-      { y: 50, opacity: 0 },
-      {
-        y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 75%',
-          toggleActions: 'play reverse play reverse'
-        }
-      }
-    );
-  }, []);
+  useScrollReveal(sectionRef, cardsRef);
 
   return (
     <section className="section testimonials" ref={sectionRef}>

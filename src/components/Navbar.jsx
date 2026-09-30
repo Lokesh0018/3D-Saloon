@@ -18,7 +18,10 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container container">
         <div className="logo">
-          <a href="#">THE GENTLEMAN'S CUT</a>
+          <a href="#">
+            <img src="/favicon.jpg" alt="Logo" className="logo-img" />
+            THE GENTLEMAN'S CUT
+          </a>
         </div>
         
         <div className="nav-links desktop-only">

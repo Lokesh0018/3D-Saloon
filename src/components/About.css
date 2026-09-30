@@ -53,13 +53,8 @@
   opacity: 0;
 }
 
-.stroke-1 { animation: drawStroke1 10s ease-in-out infinite alternate; }
-
-@keyframes drawStroke1 {
-  0% { stroke-dashoffset: 2500; opacity: 0; }
-  10% { opacity: 0.9; }
-  90% { opacity: 0.9; }
-  100% { stroke-dashoffset: 0; opacity: 0; }
+.stroke-1 {
+  /* GSAP handles animation */
 }
 
 .about-content h2 {

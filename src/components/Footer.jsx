@@ -7,7 +7,10 @@ const Footer = () => {
     <footer className="footer">
       <div className="container footer-grid">
         <div className="footer-col brand-col">
-          <h3 className="footer-logo">THE GENTLEMAN'S CUT</h3>
+          <div className="footer-brand-header">
+            <img src="/favicon.jpg" alt="Logo" className="footer-logo-img" />
+            <h3 className="footer-logo">THE GENTLEMAN'S CUT</h3>
+          </div>
           <p className="footer-desc">
             The ultimate destination for premium men's grooming and bespoke barbering. Experience the art of traditional craftsmanship.
           </p>

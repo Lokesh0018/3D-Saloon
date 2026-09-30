@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Booking.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -18,20 +15,7 @@ const Booking = () => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
 
-  useEffect(() => {
-    const el = sectionRef.current;
-    gsap.fromTo(contentRef.current.children,
-      { y: 50, opacity: 0 },
-      {
-        y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 75%',
-          toggleActions: 'play reverse play reverse'
-        }
-      }
-    );
-  }, []);
+  useScrollReveal(sectionRef, contentRef);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

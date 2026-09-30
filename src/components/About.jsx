@@ -12,6 +12,7 @@ const About = () => {
   const textRef = useRef(null);
   const imageRef = useRef(null);
   const overlayRef = useRef(null);
+  const brushRef = useRef(null);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -43,15 +44,33 @@ const About = () => {
 
     // Paint swipe overlay animation
     gsap.fromTo(overlayRef.current,
-      { scaleY: 1, transformOrigin: 'top' },
+      { scaleY: 1, transformOrigin: 'bottom' },
       {
         scaleY: 0,
-        duration: 1.2,
-        ease: 'power4.inOut',
+        duration: 1.5,
+        ease: 'power3.inOut',
         scrollTrigger: {
           trigger: el,
           start: 'top 75%',
           toggleActions: 'play reverse play reverse'
+        }
+      }
+    );
+
+    // Paint brush stroke animation
+    gsap.fromTo(brushRef.current,
+      { strokeDashoffset: 2500, opacity: 0 },
+      {
+        strokeDashoffset: 0,
+        opacity: 0.9,
+        duration: 5,
+        ease: 'power2.inOut',
+        repeat: -1,
+        yoyo: true,
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 75%',
+          toggleActions: 'play pause resume pause'
         }
       }
     );
@@ -80,7 +99,7 @@ const About = () => {
             </defs>
             
             <g filter="url(#brushTexture)">
-              <path className="brush-stroke stroke-1" d="M 0,250 L 350,50 L 100,400 L 450,200 L 200,550 L 550,350" fill="none" stroke="url(#goldGrad)" strokeWidth="80" strokeLinecap="round" strokeLinejoin="round" />
+              <path ref={brushRef} className="brush-stroke stroke-1" d="M 0,250 L 350,50 L 100,400 L 450,200 L 200,550 L 550,350" fill="none" stroke="url(#goldGrad)" strokeWidth="80" strokeLinecap="round" strokeLinejoin="round" />
             </g>
           </svg>
 

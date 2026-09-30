@@ -1,9 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Gallery.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const images = [
   "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -16,21 +13,7 @@ const Gallery = () => {
   const sectionRef = useRef(null);
   const itemsRef = useRef([]);
 
-  useEffect(() => {
-    const el = sectionRef.current;
-    
-    gsap.fromTo(itemsRef.current,
-      { y: 100, opacity: 0 },
-      {
-        y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 70%',
-          toggleActions: 'play reverse play reverse'
-        }
-      }
-    );
-  }, []);
+  useScrollReveal(sectionRef, itemsRef, { y: 100, stagger: 0.2, start: 'top 70%' });
 
   return (
     <section className="section gallery" ref={sectionRef}>
