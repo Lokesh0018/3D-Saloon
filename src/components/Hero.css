@@ -1,0 +1,152 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px; /* For navbar */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  width: 50%;
+  padding-right: 2rem;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  max-width: 500px;
+  margin-bottom: 3rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.btn-primary.filled {
+  background-color: var(--color-gold);
+  color: var(--color-bg);
+}
+
+.btn-primary.filled:hover {
+  background-color: transparent;
+  color: var(--color-gold);
+}
+
+.link-explore {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  color: var(--color-text);
+  padding-bottom: 4px;
+}
+
+.link-explore::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-text);
+  transition: var(--transition-smooth);
+}
+
+.link-explore:hover::after {
+  width: 0%;
+}
+
+.hero-visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+}
+
+.canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none; /* Let clicks pass through if needed, though OrbitControls might need events. Actually, allow events */
+  pointer-events: auto;
+}
+
+.model-image-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.model-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-bg) 0%, rgba(5,5,5,0) 100%),
+              url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+  filter: contrast(1.1) brightness(0.8);
+}
+
+.particles-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, rgba(197, 160, 89, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+@media (max-width: 992px) {
+  .hero-content {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .hero-desc {
+    margin: 0 auto 3rem auto;
+  }
+  
+  .hero-actions {
+    justify-content: center;
+  }
+  
+  .hero-visual {
+    width: 100%;
+    opacity: 0.4;
+  }
+  
+  .model-placeholder {
+    background: url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+  }
+}
