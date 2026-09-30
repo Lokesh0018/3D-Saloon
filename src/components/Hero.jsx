@@ -1,8 +1,19 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Hero.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const TOTAL_FRAMES = 145;
+
+const parallaxImages = [
+  { src: '/scissors-removebg-preview.png', className: 'hero-parallax-img hp-1' },
+  { src: '/comb-removebg-preview.png', className: 'hero-parallax-img hp-2' },
+  { src: '/brush-removebg-preview.png', className: 'hero-parallax-img hp-3' },
+  { src: '/spray-removebg-preview.png', className: 'hero-parallax-img hp-4' },
+  { src: '/tri-removebg-preview.png', className: 'hero-parallax-img hp-5' },
+];
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -10,6 +21,7 @@ const Hero = () => {
   const visualRef = useRef(null);
   const canvasRef = useRef(null);
   const imagesRef = useRef([]);
+  const parallaxRefs = useRef([]);
   const [loaded, setLoaded] = useState(false);
 
   // Animation state
@@ -95,7 +107,29 @@ const Hero = () => {
       .fromTo(textRef.current.children, 
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: 'power3.out' }, "-=1"
+      )
+      .fromTo(parallaxRefs.current, 
+        { y: 100, opacity: 0, scale: 0.8 }, 
+        { y: 0, opacity: 0.8, scale: 1, duration: 1.5, stagger: 0.1, ease: 'power3.out' }, 
+        "-=1.5"
       );
+
+    // Scroll parallax for background images
+    parallaxRefs.current.forEach((el, index) => {
+      if (!el) return;
+      const speed = (index % 2 === 0 ? 1 : -0.5) * (index + 1) * 40;
+      gsap.to(el, {
+        y: speed,
+        rotation: speed / 3,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.5,
+        }
+      });
+    });
   }, []);
 
   // Mouse tracking
@@ -146,6 +180,18 @@ const Hero = () => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
+      <div className="hero-parallax-bg">
+        {parallaxImages.map((img, index) => (
+          <img 
+            key={index}
+            src={img.src} 
+            alt="Parallax element" 
+            className={img.className}
+            ref={el => parallaxRefs.current[index] = el}
+          />
+        ))}
+      </div>
+
       <div className="hero-inner container">
         <div className="hero-content" ref={textRef}>
           <h2 className="text-gold subtitle">Precision, style, and confidence in every detail.</h2>

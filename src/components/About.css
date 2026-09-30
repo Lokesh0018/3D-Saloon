@@ -11,26 +11,55 @@
 
 .about-image-wrapper {
   position: relative;
-  aspect-ratio: 3/4;
-  overflow: hidden;
+  aspect-ratio: 1/1.22; /* Fine-tuned to perfectly frame the image */
+  max-height: 610px;
   border-radius: 4px;
+  overflow: visible; /* Allow strokes to bleed out slightly */
+  align-self: start;
+  margin-top: -5rem; /* Force the image higher up the page */
 }
 
 .about-image {
+  position: relative;
   width: 100%;
   height: 100%;
-  background: url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+  z-index: 5; /* Keep image in front of strokes */
   filter: contrast(1.1) brightness(0.9) grayscale(20%);
 }
 
-.about-3d {
+.paint-overlay {
   position: absolute;
-  bottom: -10%;
-  right: -10%;
-  width: 250px;
-  height: 250px;
-  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg); /* Dark reveal */
+  z-index: 10;
+}
+
+.gold-brush-svg {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  z-index: 1; /* Behind image */
   pointer-events: none;
+}
+
+.brush-stroke {
+  stroke-dasharray: 2500;
+  stroke-dashoffset: 2500;
+  opacity: 0;
+}
+
+.stroke-1 { animation: drawStroke1 10s ease-in-out infinite alternate; }
+
+@keyframes drawStroke1 {
+  0% { stroke-dashoffset: 2500; opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
 }
 
 .about-content h2 {
@@ -48,11 +77,5 @@
   .about-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
-  }
-  
-  .about-3d {
-    width: 150px;
-    height: 150px;
-    right: 0;
   }
 }

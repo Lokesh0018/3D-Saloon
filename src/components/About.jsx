@@ -1,33 +1,17 @@
-import React, { useEffect, useRef, Suspense } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Canvas } from '@react-three/fiber';
-import { Float, Environment } from '@react-three/drei';
 import './About.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AbstractShape = () => {
-  return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={1.5}>
-      <mesh rotation={[Math.PI / 4, 0, Math.PI / 4]}>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshPhysicalMaterial 
-          color="#c5a059"
-          metalness={0.8}
-          roughness={0.2}
-          clearcoat={1}
-          wireframe={true}
-        />
-      </mesh>
-    </Float>
-  );
-};
+
 
 const About = () => {
   const sectionRef = useRef(null);
   const textRef = useRef(null);
   const imageRef = useRef(null);
+  const overlayRef = useRef(null);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -43,10 +27,25 @@ const About = () => {
       }
     );
 
+    // Image scale animation
     gsap.fromTo(imageRef.current,
-      { scale: 1.1, opacity: 0 },
+      { scale: 1.1 },
       {
-        scale: 1, opacity: 1, duration: 1.5, ease: 'power2.out',
+        scale: 1, duration: 1.5, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 75%',
+        }
+      }
+    );
+
+    // Paint swipe overlay animation
+    gsap.fromTo(overlayRef.current,
+      { scaleY: 1, transformOrigin: 'top' },
+      {
+        scaleY: 0,
+        duration: 1.2,
+        ease: 'power4.inOut',
         scrollTrigger: {
           trigger: el,
           start: 'top 75%',
@@ -58,21 +57,38 @@ const About = () => {
   return (
     <section id="about" className="section about" ref={sectionRef}>
       <div className="container about-grid">
-        <div className="about-image-wrapper" ref={imageRef}>
-          <div className="about-image" style={{
-            background: `url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover no-repeat`
+        <div className="about-image-wrapper">
+          <svg className="gold-brush-svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <filter id="brushTexture" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.015" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="25" xChannelSelector="R" yChannelSelector="G" />
+              </filter>
+              
+              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#c5a059" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#e8c77b" stopOpacity="1" />
+                <stop offset="100%" stopColor="#96773a" stopOpacity="0.8" />
+              </linearGradient>
+              <linearGradient id="goldGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#e8c77b" stopOpacity="0.75" />
+                <stop offset="100%" stopColor="#c5a059" stopOpacity="0.95" />
+              </linearGradient>
+            </defs>
+            
+            <g filter="url(#brushTexture)">
+              <path className="brush-stroke stroke-1" d="M 0,250 L 350,50 L 100,400 L 450,200 L 200,550 L 550,350" fill="none" stroke="url(#goldGrad)" strokeWidth="80" strokeLinecap="round" strokeLinejoin="round" />
+            </g>
+          </svg>
+
+          <div className="paint-overlay" ref={overlayRef}></div>
+          <div className="about-image" ref={imageRef} style={{
+            background: `url('/barber.png') top center/cover no-repeat`,
+            transform: `scale(1.1) translateY(6%)`,
+            transformOrigin: 'bottom center'
           }}>
           </div>
-          <div className="about-3d">
-            <Canvas camera={{ position: [0, 0, 3] }} alpha={true}>
-              <ambientLight intensity={0.5} />
-              <directionalLight position={[2, 2, 2]} intensity={1} />
-              <Suspense fallback={null}>
-                <AbstractShape />
-                <Environment preset="studio" />
-              </Suspense>
-            </Canvas>
-          </div>
+
         </div>
         <div className="about-content" ref={textRef}>
           <h4 className="subtitle text-gold">Mastering the Craft</h4>

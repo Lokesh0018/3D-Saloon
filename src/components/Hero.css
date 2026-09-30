@@ -4,9 +4,34 @@
   display: flex;
   align-items: center;
   position: relative;
-  overflow: hidden;
   background-color: #000; /* Pure black */
+  overflow: hidden;
 }
+
+.hero-parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15; /* Placed above hero-inner (10) */
+}
+
+.hero-parallax-img {
+  position: absolute;
+  opacity: 0.6; /* Slight transparency so it's not too overpowering */
+  filter: blur(2px); /* Only blur for depth of field, keeping original colors */
+  object-fit: contain;
+}
+
+/* Position around the edges to avoid overlapping text and the main subject */
+.hp-1 { top: 10%; right: 8%; left: auto; width: 140px; transform: rotate(15deg); } /* Scissors */
+.hp-2 { top: 15%; left: 5%; right: auto; width: 160px; transform: rotate(-25deg); } /* Comb */
+.hp-3 { bottom: 2%; left: 2%; top: auto; width: 160px; transform: rotate(15deg); } /* Brush */
+.hp-4 { top: 40%; right: 4%; width: 130px; transform: rotate(-15deg); } /* Spray */
+.hp-5 { bottom: 5%; right: 2%; top: auto; width: 140px; transform: rotate(35deg); } /* Razor */
+
 
 .hero-inner {
   display: flex;
