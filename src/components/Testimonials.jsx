@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Quote } from 'lucide-react';
 import './Testimonials.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -48,16 +49,33 @@ const Testimonials = () => {
   return (
     <section className="section testimonials" ref={sectionRef}>
       <div className="container">
+        <div className="testimonials-header">
+          <h4 className="subtitle text-gold">Word of Mouth</h4>
+          <h2>Client Stories</h2>
+        </div>
+        
         <div className="testimonials-grid">
           {testimonials.map((item, i) => (
             <div className="testimonial-card" key={item.id} ref={el => cardsRef.current[i] = el}>
+              <div className="quote-icon-bg">
+                <Quote size={80} strokeWidth={1} />
+              </div>
+              
               <div className="stars">
                 {[...Array(item.rating)].map((_, index) => (
                   <span key={index} className="star">★</span>
                 ))}
               </div>
+              
               <p className="quote">"{item.quote}"</p>
-              <h5 className="author">- {item.name}</h5>
+              
+              <div className="author-info">
+                <div className="author-line"></div>
+                <div>
+                  <h5 className="author">{item.name}</h5>
+                  <span className="author-title">Verified Client</span>
+                </div>
+              </div>
             </div>
           ))}
         </div>
